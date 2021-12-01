@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+Groceries Page
+{% endblock %}
+{% block content %}
+<div class="row" style="margin-top: 20px; margin-left: 20px">
+   <div class="col-8">
+       <h2>Available Market Items</h2>
+       <p>Click on one of the items to start buying</p>
+       <br>
+      <table class="table table-hover table-striped table-bordered table-light">
+         <thead>
+            <tr>
+               <!-- Your Columns HERE -->
+               <th scope="col">ID</th>
+               <th scope="col">Name</th>
+               <th scope="col">Barcode</th>
+               <th scope="col">Price</th>
+               <th scope='col'>Options</th>
+            </tr>
+         </thead>
+         <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for item in items %}
+            {% include 'includes/items_modals.html' %}
+            <tr>
+               <td>{{ item.id }}</td>
+               <td>{{ item.name }}</td>
+               <td>{{ item.barcode }}</td>
+               <td>${{ item.price }}</td>
+               <td>
+                  <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-MoreInfo-{{ item.id }}">Description</button>
+                  <button class="btn btn-outline btn-success" data-toggle="modal" data-target="#Modal-PurchaseConfirm-{{ item.id }}">Buy</button>
+               </td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   <div class="col-4">
+        <h2>Items in Cart</h2>
+        <p>Click on one of the items in cart to remove</p>
+        <br>
+    </div>
+</div>
+Here you'll find items that are currently in stock.
+{% endblock %}
